@@ -1,3 +1,6 @@
+.postParentDiv {
+  padding: 2em;
+}
 .moreView {
   margin: 16px 16px 24px;
   padding: 16px 16px 32px;
@@ -33,12 +36,22 @@
 
 .card {
   margin-right: 15px;
-  padding: 13px;
+  padding: 10px;
   max-width: 222px;
   width: 222px;
   height: 270px;
   display: inline-block;
   cursor: pointer;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s, box-shadow 0.2s; 
+  margin-bottom: 10px;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Hover effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
 .card .favorite {
@@ -84,4 +97,11 @@
 .recommendations .heading span {
   font-size: 24px;
   color: #002f34;
+}
+
+.name{
+  color: #264653;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

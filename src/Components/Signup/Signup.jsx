@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../logo192.png';
 import './Signup.css';
 import firebase from 'firebase/app';
@@ -8,7 +8,7 @@ import {auth} from '../../firebase/config'
 
 
 export default function Signup() {
-
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,18 +18,40 @@ export default function Signup() {
     e.preventDefault();
     console.log('Submitting form with:', { username, email, password, phone });
     console.log(username)
-    auth.createUserWithEmailAndPassword(email, password)
-    .then((result)=>{
-      console.log('User created:', result.user);
-      return result.user.updateProfile({displayName:username})
-    })
-    .then(()=>{
-      console.log('Profile updated successfully');
-      alert('Signup successful!');
+    auth.createUserWithEmailAndPassword(email, password).then((result) => {
+      result.user.updateProfile({displayName:username}).then(() => {
+        firebase.firestore().collection('users').add({
+          id:result.user.uid,
+          username:username,
+          phone:phone
+        }).then(() =>{
+          navigate('/login')
+        })
+      })
     })
     .catch((error) => {
       console.error("Error created  ",  error);
     });
+
+
+    // auth.createUserWithEmailAndPassword(email, password)
+    // .then((result)=>{
+    //   console.log('User created:', result.user);
+    //   const user = result.user
+    //   return user.updateProfile({displayName:username}).then(() => user);
+    // })
+    // .then((user)=>{
+    //   firebase.firestore().collection('users').add({
+    //     id:user.uid,
+    //     username:username,
+    //     phone:phone
+    //   })
+    // }).then(() => {
+    //   console.log('Everything was successfull')
+    // })
+    // .catch((error) => {
+    //   console.error("Error created  ",  error);
+    // });
 
   };
   return (

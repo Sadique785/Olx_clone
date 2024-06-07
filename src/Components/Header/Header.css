@@ -155,6 +155,26 @@
   margin-left: 5px;
 }
 
+.welcome-message {
+  color: #007bff; /* Blue */
+}
+.logout-button {
+  color: #fff; 
+  background-color: #002f34; /* Red background */
+  border: none;
+  padding: 8px 16px;
+  margin-left: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+
+}
+.logout-button:hover {
+    background-color: #11555b; /* White background on hover */
+    color: #fff; /* Red text on hover */
+  }
+
+
 @media only screen and (max-width: 700px) {
   .placeSearch,
   .productSearch,
